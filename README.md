@@ -44,7 +44,9 @@
 <!-- Topologia -->
 <section>
   <h2>Topologia</h2>
+  <p align="center">
   <img src="img/Topology.jpg" alt="Topologia sieci zaprojektowanej w środowisku Mininet" style="width: 75%;">
+  </p>
   <p>Zaproponowana przez nas topologia sieci składa się z 3 hostów, 3 routerów i 1 switcha. Dzięki takiej konstrukcji sieci możemy pokazać zaimplementowane mechanizmy. Połączenie routerów w trójkącie daje nam możliwość pokazania jak poprzez protokół PW-OSPF zmieniamy statyczny routing, omijamy awaryjne łącza. Natomiast para hostów połączona do sieci poprzez switch umożliwia przetestowanie mechanizmów zaimplementowanych dla switcha. Dodatkowo do każdego switcha i routera przydzielamy osobny kontroler.</p>
 </section>
 
@@ -61,7 +63,9 @@
   <!-- Przykładowy przepływ pakietów -->
   <subsection>
     <h3>Przykładowy przepływ pakietów</h3>
+     <p align="center">
     <img src="img/Samlple_flow.png" alt="Test routingu w zaprojektowanej sieci" style="width: 25%;">
+     </p>
     <p>Na początku wszystkie pakiety idące do h1 przechodzą przez r1 i r2. Natomiast, gdy zasymulujemy awarię to zgodnie z tabelą routingu idą domyślną trasą, czyli przez łącze pomiędzy r1 i r3.</p>
   </subsection>
 </section>
