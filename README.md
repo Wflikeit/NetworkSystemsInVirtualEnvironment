@@ -96,9 +96,9 @@
       <li><strong>Sprawdzanie wartości i dekrementacja TTL</strong></li>
       <li><strong>Aktualizacja źródłowego adresu MAC na podstawie ustawionego portu wyjściowego </strong></li>
       <li><strong>Wysłanie pakietu poprzez wcześniej ustalony port wyjściowy</strong></li>
-      <li><strong>Przesyłanie pakietów przeznaczonych dla lokalnego routera są przesyłane do kontrolera</strong></li>
+      <li><strong>Przesyłanie pakietów przeznaczonych dla lokalnego routera do kontrolera</strong></li>
       <li><strong>Przesyłanie pakietów, które nie mają wpisu w tabeli routingu do kontrolera</strong></li>
-      <li><strong>Przesyłanie pakietów innych protokołów niż te sprecyzowane przy parsowaniu są przesyłane do kontrolera</strong></li>
+      <li><strong>Przesyłanie pakietów innych protokołów niż te sprecyzowane przy parsowaniu do kontrolera</strong></li>
       </ul>
     <!-- Control plane -->
       <li>Control plane</li>
