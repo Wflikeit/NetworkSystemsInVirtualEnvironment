@@ -37,7 +37,7 @@
     <li><strong>BMV2</strong> - Switch operujący na poziomie oprogramowania, na którym uruchamiamy program P4 skompilowany przy pomocy p4c</li>
     <li><strong>Socket</strong> - Biblioteka do tworzenia socketów, które wysyłają lub wykrywają nadchodzący pakiet</li>
     <li><strong>Scapy</strong> – Biblioteka Pythona do tworzenia i dekodowania pakietów oraz ich wysyłania i odbierania</li>
-    <li><strong>P4Runtime</strong> - Interfejs kontrolera sieciowego, który zarządza płaszczyzną danych w P4, oraz monitorowanie reguł przekazywania pakietów i stanu urządzenia</li>
+    <li><strong>P4Runtime</strong> - Interfejs lokalnej warstwy sterowania sieciowego, który zarządza płaszczyzną danych w P4, oraz monitorowanie reguł przekazywania pakietów i stanu urządzenia</li>
   </ul>
 </section>
 
@@ -47,7 +47,7 @@
   <p align="center">
   <img src="img/Topology.jpg" alt="Topologia sieci zaprojektowanej w środowisku Mininet" style="width: 75%;">
   </p>
-  <p>Zaproponowana przez nas topologia sieci składa się z 3 hostów, 3 routerów i 1 switcha. Dzięki takiej konstrukcji sieci możemy pokazać zaimplementowane mechanizmy. Połączenie routerów w trójkącie daje nam możliwość pokazania jak poprzez protokół PW-OSPF zmieniamy statyczny routing, omijamy awaryjne łącza. Natomiast para hostów podłączona do sieci poprzez switch umożliwia przetestowanie mechanizmów zaimplementowanych dla switcha. Dodatkowo do każdego switcha i routera przydzielamy osobny kontroler.</p>
+  <p>Zaproponowana przez nas topologia sieci składa się z 3 hostów, 3 routerów i 1 switcha. Dzięki takiej konstrukcji sieci możemy pokazać zaimplementowane mechanizmy. Połączenie routerów w trójkącie daje nam możliwość pokazania jak poprzez protokół PW-OSPF zmieniamy statyczny routing, omijamy awaryjne łącza. Natomiast para hostów podłączona do sieci poprzez switch umożliwia przetestowanie mechanizmów zaimplementowanych dla switcha. Dodatkowo do każdego switcha i routera przydzielamy osobny agent routingu.</p>
 </section>
 
 <!-- Mininet i Linux -->
@@ -96,9 +96,9 @@
       <li><strong>Sprawdzanie wartości i dekrementacja TTL</strong></li>
       <li><strong>Aktualizacja źródłowego adresu MAC na podstawie ustawionego portu wyjściowego </strong></li>
       <li><strong>Wysłanie pakietu poprzez wcześniej ustalony port wyjściowy</strong></li>
-      <li><strong>Przesyłanie pakietów przeznaczonych dla lokalnego routera do kontrolera</strong></li>
-      <li><strong>Przesyłanie pakietów, które nie mają wpisu w tabeli routingu do kontrolera</strong></li>
-      <li><strong>Przesyłanie pakietów innych protokołów niż te sprecyzowane przy parsowaniu do kontrolera</strong></li>
+      <li><strong>Przesyłanie pakietów przeznaczonych dla lokalnego routera do lokalnej warstwy sterowania</strong></li>
+      <li><strong>Odrzucanie pakietów innych protokołów niż te sprecyzowane przy parsowaniu do lokalnej warstwy sterowania</strong></li>
+      <li>Odrzucanie niepoprawnych pakietów IP</li>
       </ul>
     <!-- Control plane -->
       <li>Control plane</li>
@@ -110,7 +110,7 @@
       <li><strong>Tworzenie tabeli forwardingu poprzez protokół dynamicznego routingu PW-OSPF</strong></li>
       <li><strong>Wsparcie statycznej tablicy routingu w dodatku do ścieżek protokołu PW-OSPF</strong></li>
       <li><strong>Obsługa pakietów kierowanych bezpośrednio do routera</strong></li>
-      <li><strong>Obsługa niepoprawnych pakietów IP</strong></li>
+      <li>Wysyłanie i odbieranie pakietów protokołu PW-OSPF</li>
       </ul>
    </ul>
   </subsection>
@@ -123,15 +123,13 @@
       <ul>
       <li><strong>Procesor pakietów odpowiedzialny za przetwarzanie pakietów przychodzących do switcha</strong></li>
       <li><strong>Tabela adresów MAC dokonująca dokładnego dopasowania adresu MAC docelowego urządzenia i wysyłająca pakiet do odpowiedniego portu wyjściowego lub odpowiedniej grupy multicastowej</strong></li>
-      <li><strong>Tabela ARP dokonująca dokładnego dopasowania docelowego adresu IP i wysyłająca odpowiedź z odpowiednim adresem MAC</strong>
-      <li>Odpowiadanie na żądania ARP</li>
+      <li>Wysłanie powiadomienia warstwy sterowania o nowym powiązaniu źródłowego adresu MAC z portem</li>
       </ul>
     <!-- Control plane -->
       <li>Control plane</li>
       <ul>
       <li><strong>Aktualizacja tabeli zawierającej pary adres MAC i port wyjściowy</strong></li>
-      <li><strong>Aktualizacja tabeli ARP</strong></li>
-      <li><strong>Rozsyłanie żądań ARP</strong></li>
+      <li>Konfiguracja grupy multicastowej</li>
       </ul>
    </ul>
   </subsection>
