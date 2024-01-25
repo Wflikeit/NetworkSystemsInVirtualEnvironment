@@ -40,6 +40,27 @@
     <li><strong>P4Runtime</strong> - Interfejs lokalnej warstwy sterowania sieciowego, który zarządza płaszczyzną danych w P4, oraz monitorowanie reguł przekazywania pakietów i stanu urządzenia</li>
   </ul>
 </section>
+<!-- PW-OSPF -->
+<section>
+  <h2>PW-OSPF - skrócony opis</h2>
+  <span>
+    PW-OSPF to stosunkowo prosty protokół routingu oparty na OSPFv2, który obsługuje sieci z pseudowire( emulowanego połączenia punkt-punkt w MPLS). Routery regularnie wysyłają pakiety HELLO, aby odkrywać sąsiadów i utrzymywać łączność. Po wykryciu zmiany w sieci, każdy router rozgłasza swoje informacje o sieci, a algorytm Dijkstry jest używany do obliczenia tras. PW-OSPF umożliwia dynamiczne zarządzanie trasami w sieciach z pseudowire.
+  </span>
+  <br></br>
+  <span>
+    W protokole PW-OSPF obsługujemy 2 typy protokołów:
+  </span>
+  <br></br>
+  <span>
+  <b>PWOSPF Hello Protocol</b> służy do odkrywania i utrzymywania stanu dostępnych połączeń, gdzie routery periodycznie nasłuchują i rozsyłają pakiety HELLO, określając, że brak odpowiedzi od sąsiada oznacza, że router jest niedostępny. Odbiór pakietu HELLO informuje o czasie działania sąsiada oraz umożliwia śledzenie połączeń między routerami.
+  </span>
+  <br></br>
+  <span>
+  <b>PWOSPF Link State Updates</b> służy do rozsyłania informacji o lokalnej łączności oraz sąsiednich routerach w sieci. Te aktualizacje wysyłane są okresowo, w celu aktualizacji bazy danych topologii sieciowej w każdym routerze.
+  Dodatkowo, protokół umożliwia routerowi bramy reklamowanie domyślnej podsieci dla interfejsu połączonego z oddzielną siecią
+  </span>
+  
+</section>
 
 <!-- Topologia -->
 <section>
@@ -72,7 +93,7 @@
 
 <!-- Implementacja -->
 <section>
-  <h2>Implementacja</h2>
+  <h2>Projekt implementacji systemu z wykorzystaniem P4Pi</h2>
   
   <!-- RAW Socket -->
   <subsection>
