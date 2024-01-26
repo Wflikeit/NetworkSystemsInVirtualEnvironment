@@ -88,6 +88,16 @@
     <img src="img/Samlple_flow.png" alt="Test routingu w zaprojektowanej sieci" style="width: 25%;">
      </p>
     <p>Na początku wszystkie pakiety idące do h1 przechodzą przez r1 i r2. Natomiast, gdy zasymulujemy awarię to zgodnie z tabelą routingu idą domyślną trasą, czyli przez łącze pomiędzy r1 i r3.</p>
+    <p align="center">
+    <img src="img/s1_h2_to_h3.png" alt="Przykładowe połączenie pomiędzy hostem h2 i h3 widziany z perspektywy switcha" style="width: 25%;">
+    </p>
+    <p>Na powyższym zrzucie ekranu z programu wireshark widzimy przykładowy przepływ pakietów w przypadku komunikowania się dwóch hostów w tej samej podsieci. Przy nawiązywaniu połączenia na początku host h2 wysyła żądanie ARP na adres rozgłoszeniowy, a switch przekazuje je wszystkim podłączonym do niego urządzeniom. Następnie przekazuje on otrzymaną otpowiedź z powrotem do nadawcy żądania ARP. Taka sama sytuacja ma miejsce, gdy host h3 chce odpowiedzieć na ping, a na końcu następuje wymiana wpisami w tablicy ARP.  </p>
+        <p align="center">
+    <img src="img/s1_h2toh1.png" alt="Przykładowe połączenie pomiędzy hostem h2 i h1 z perspektywy switcha" style="width: 25%;">
+    </p>
+    <p align="center">
+    <img src="img/R1_h2_to_h1.png" alt="Przykładowe połączenie pomiędzy hostem h2 i h1 z perspektywy switcha" style="width: 25%;">
+    </p>
   </subsection>
 </section>
 
