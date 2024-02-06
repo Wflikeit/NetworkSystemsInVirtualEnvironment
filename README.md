@@ -91,7 +91,7 @@
     <p align="center">
     <img src="img/s1_h2_to_h3.png" alt="Przykładowe połączenie pomiędzy hostem h2 i h3 widziany z perspektywy switcha" style="width: 75%;">
     </p>
-    <p>Na powyższym zrzucie ekranu z programu wireshark widzimy przykładowy przepływ pakietów w przypadku komunikowania się dwóch hostów w tej samej podsieci. Przy nawiązywaniu połączenia na początku host h2 wysyła żądanie ARP na adres rozgłoszeniowy, a switch przekazuje je wszystkim podłączonym do niego urządzeniom. Następnie przekazuje on otrzymaną otpowiedź z powrotem do nadawcy żądania ARP. Taka sama sytuacja ma miejsce, gdy host h3 chce odpowiedzieć na ping, a na końcu następuje wymiana wpisami w tablicy ARP.  </p>
+    <p>Na powyższym zrzucie ekranu z programu wireshark widzimy przykładowy przepływ pakietów w przypadku komunikowania się dwóch hostów w tej samej podsieci. Przy nawiązywaniu połączenia na początku host h2 wysyła żądanie ARP na adres rozgłoszeniowy, a switch przekazuje je wszystkim podłączonym do niego urządzeniom. Następnie przekazuje on otrzymaną odpowiedź z powrotem do nadawcy żądania ARP. Taka sama sytuacja ma miejsce, gdy host h3 chce odpowiedzieć na ping, a na końcu następuje wymiana wpisami w tablicy ARP.  </p>
         <p align="center">
     <img src="img/s1_h2toh1.png" alt="Przykładowe połączenie pomiędzy hostem h2 i h1 z perspektywy switcha" style="width: 75%;">
     </p>
