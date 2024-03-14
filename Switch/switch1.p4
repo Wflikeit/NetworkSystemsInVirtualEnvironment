@@ -28,18 +28,19 @@ header Ethernet_t{
     bit<16> ethertype;
     }
 
-header CpuMetaData_t{
-    bit<8> FromCpu;
-    bit<16> SourcePort;
-    bit<16> OriginEthertype;
-    }
-
 header ARP_t{
     bit<8> HardwareAddressLength;
     bit<8> ProtocolAddressLength;
     bit<16> HardwareType;
     bit<16> Protocoltype;
     bit<16> Opcode;
+
+header CpuMetaData_t{
+    bit<8> FromCpu;
+    bit<16> SourcePort;
+    bit<16> OriginEthertype;
+    }
+
 
 #nwm czy nie powinno być tak jak w tym switchu z yale ze jest załozenie ze hardware to eth a protokul to ip
 
@@ -64,21 +65,22 @@ parser Parser(packet_in packet,out_of_headers hdr,inout standard_metadata_t stan
     state parse_ethernet{
         packet.extract(hdr.ethernet);
         transition select(hdr.ethernet.etherType)
-            {TypeArp: parse_arp;
-            CpuMetaDataType: parse_cpu_metadata;
+            {CpuMetaDataType: parse_cpu_metadata;
+                TypeArp: parse_arp;
             default: accept; }
             }
 
-    state parse_arp{
-    packet.extract(hdr.arp);
-    transition select(hdr.arp){
-    CpuMetaDataType: parse_cpu_metadata;
-    default: accept;}
-    }
 
     state parse cpu_metadata{
     packet.extract(hdr.cpu_metadata);
     transition select (hdr.cpu_metadata.OriginEthertype){
+    TypeArp: parse_arp;
+    default: accept;}
+    }
+
+    state parse_arp{
+    packet.extract(hdr.arp);
+    transition select(hdr.arp){
     default: accept;}
     }
 
@@ -88,7 +90,7 @@ parser Parser(packet_in packet,out_of_headers hdr,inout standard_metadata_t stan
     control Ingress(inout headers hdr, inout standard_metadata_t standard_metadata, inout metadata meta) {
 
     action drop() {
-        to_be_dropped(standard_metadata);
+        mark_to_drop(standard_metadata);
          }
     action mac_forward(egressSpec_t eport){
         standard_metadata.egress_spec = eport;
@@ -117,7 +119,7 @@ parser Parser(packet_in packet,out_of_headers hdr,inout standard_metadata_t stan
 
     control Egress(inout headers hdr, inout standard_metadata_t standard_metadata, inout metadata meta){
         action drop(){
-            to_be_dropped(standard_metadata);
+            mark_to_drop(standard_metadata);
             }
         apply{
             if(standard_metadata.egress_port == standard_metadata.ingress_port)
