@@ -62,26 +62,28 @@ parser Parser(packet_in packet,out_of_headers hdr,inout standard_metadata_t stan
     { state start {
         transition parse_ethernet; }
 
-    state parse_ethernet{
-        packet.extract(hdr.ethernet);
-        transition select(hdr.ethernet.etherType)
-            {CpuMetaDataType: parse_cpu_metadata;
-                TypeArp: parse_arp;
-            default: accept; }
-            }
+        state parse_ethernet{
+            packet.extract(hdr.ethernet);
+            transition select(hdr.ethernet.etherType)
+                {CpuMetaDataType: parse_cpu_metadata;
+                    TypeArp: parse_arp;
+                default: accept; }
+                }
 
 
-    state parse cpu_metadata{
-    packet.extract(hdr.cpu_metadata);
-    transition select (hdr.cpu_metadata.OriginEthertype){
-    TypeArp: parse_arp;
-    default: accept;}
-    }
+        state parse cpu_metadata{
+        packet.extract(hdr.cpu_metadata);
+        transition select (hdr.cpu_metadata.OriginEthertype){
+        TypeArp: parse_arp;
+        default: accept;}
+        }
 
-    state parse_arp{
-    packet.extract(hdr.arp);
-    transition select(hdr.arp){
-    default: accept;}
+        state parse_arp{
+        packet.extract(hdr.arp);
+        #transition select(hdr.arp){
+        #default: accept;}
+        transition accept;
+        }
     }
 
     control VerifyChecksum(inout headers hdr, inout metadata metad){
